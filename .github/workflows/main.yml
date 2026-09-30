@@ -9,16 +9,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Build with Buildozer
-        uses: ArtemSydorov/buildozer-action@v1
+        uses: akaihola/buildozer-action@v1
         with:
           command: buildozer android debug
           subfolder: .
 
       - name: Upload APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: BlockDestroyer-APK
           path: bin/*.apk
