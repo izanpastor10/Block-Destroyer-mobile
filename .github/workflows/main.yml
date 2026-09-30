@@ -1,0 +1,24 @@
+name: Compilar APK Android
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build with Buildozer
+        uses: ArtemSydorov/buildozer-action@v1
+        with:
+          command: buildozer android debug
+          subfolder: .
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: BlockDestroyer-APK
+          path: bin/*.apk
