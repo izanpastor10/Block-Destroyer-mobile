@@ -7,21 +7,32 @@ on:
 
 jobs:
   build:
-    name: Build for Android
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
+      - name: Configurar Python
+        uses: actions/setup-python@v5
         with:
-          command: buildozer android debug
-          subfolder: .
+          python-version: '3.10'
 
-      - name: Upload APK Artifact
+      - name: Instalar dependencias del sistema
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip libffi-dev libssl-dev build-essential ccache libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake gettext lldb
+
+      - name: Instalar Buildozer y Cython
+        run: |
+          pip install --upgrade pip setuptools
+          pip install "cython<3.0.0" buildozer
+
+      - name: Compilar APK con Buildozer
+        run: |
+          buildozer android debug
+
+      - name: Subir APK generado
         uses: actions/upload-artifact@v4
         with:
           name: BlockDestroyer-APK
