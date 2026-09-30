@@ -21,7 +21,7 @@ jobs:
       - name: Instalar dependencias del sistema
         run: |
           sudo apt-get update
-          sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip libffi-dev libssl-dev build-essential ccache libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake gettext lldb
+          sudo apt-get install -y aidl git zip unzip openjdk-17-jdk python3-pip libffi-dev libssl-dev build-essential ccache libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake gettext lldb
 
       - name: Instalar Buildozer y Cython
         run: |
